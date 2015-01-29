@@ -1,0 +1,108 @@
+package com.assignment.spiral;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class SpiralPrintService {
+	private static String printMatrixInSpiral(int[][] sp,int rowS,int colS){
+		
+		int loop = 0;
+		int spiralCt = 0;
+		if (rowS == colS)
+			spiralCt = rowS-3;
+		else{
+			spiralCt = rowS>colS?rowS-2:colS-2;
+		}
+			
+		while(loop < spiralCt){
+			for(int i = loop;i<colS-1;i++){
+				System.out.print(" "+sp[loop][i]);
+			}
+			
+			for(int j = loop + 1; j < rowS;j++){
+				System.out.println(" "+sp[j][colS-loop]);
+			}
+			
+			for(int k = colS-loop; k < loop; k++){
+				System.out.println(" "+sp[rowS-loop][k]);
+			}
+			
+			for(int l=rowS - loop;l<loop+1;l++){
+				System.out.println(" "+sp[l][loop]);
+			}
+		}
+		return "";
+	}
+	
+	private static int[][] readInputData(){
+		
+	//  prompt the user to enter their name
+	      System.out.print("Enter the row Size: ");
+	 
+	      //  open up standard input
+	      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	 
+	      int rowS = 0;
+	 
+	      //  read the rowS from the command-line; need to use try/catch with the
+	      //  readLine() method
+	      try {
+	         rowS = Integer.parseInt(br.readLine());
+	      } catch (IOException ioe) {
+	         System.out.println("IO error trying to read your rowS!");
+	         System.exit(1);
+	      }
+	 
+	      System.out.print("Enter the col Size: ");
+	 	
+	      int colS = 0;
+	 
+	      //  read the rowS from the command-line; need to use try/catch with the
+	      //  readLine() method
+	      try {
+	    	  colS = Integer.parseInt(br.readLine());
+	      } catch (IOException ioe) {
+	         System.out.println("IO error trying to read your colS!");
+	         System.exit(1);
+	      }
+	      
+	      System.out.print("Enter the array data: ");
+		  String dataS = "";
+	      int sp[][] = new int[rowS][colS];
+	 
+	      //  read the rowS from the command-line; need to use try/catch with the
+	      //  readLine() method
+	      try {
+	    	  dataS = br.readLine();
+	      } catch (IOException ioe) {
+	         System.out.println("IO error trying to read your array data!");
+	         System.exit(1);
+	      }
+	      
+	      String[] dataSP = dataS.split(" ");
+	      if (dataSP.length != rowS*colS){
+	    	  System.out.println("the array data is not appropriate to build 2-dimensional array of size "+rowS+" x "+colS);
+	    	  System.exit(1);
+	      }
+	      System.out.println("dataSP: "+dataSP);
+	      int dataSPCtr = 0;
+	      for(int i = 0 ;i < rowS ;i++){
+	    	  for(int j = 0;j<colS;j++){
+	    		  sp[i][j] = Integer.parseInt(dataSP[dataSPCtr++]);
+	    	  }
+	      }
+	      return sp;
+	}
+	 public static void main(String[] args){
+		 System.out.println("sai7..");
+		 int rowS = 0,colS = 0;
+		// read input
+		 int sp[][] = readInputData();
+		 rowS = sp.length;
+		 colS = sp[0].length;
+		 
+		 // print spiral
+		 printMatrixInSpiral(sp,rowS,colS);
+	 }
+}
