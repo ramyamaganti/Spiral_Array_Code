@@ -95,7 +95,6 @@ public class SpiralPrintService {
 	      return sp;
 	}
 	 public static void main(String[] args){
-		 System.out.println("sai7..");
 		 int rowS = 0,colS = 0;
 		// read input
 		 int sp[][] = readInputData();
